@@ -10,14 +10,14 @@ The API is deployed and accessible at:
 
 You can visit this URL to see all records or test API functionality. 
 
-Note: I could add the ec2 instance IP (http://54.81.85.133:8000/) as Cname
+Note: I could add the ec2 instance IP (http://54.81.85.133:8000/) as A 
 record in my domain configurations but I changed the bakcend
 of my link shorterner and now I can monitor who and when is 
 accessing this link)
 
 ### 📬 Testing API with Postman
 
-If you prefer testing with **Postman** or other API tools, use the following base URL:
+I choose **Postman** for testing the API so use the following base URL:
 
 🔗 `http://54.81.85.133:8000/api/<The URL for testing>`
 

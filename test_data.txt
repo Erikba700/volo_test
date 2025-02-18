@@ -1,0 +1,105 @@
+1️⃣ Create Personal Card (Valid Input)
+URL: POST
+
+http://3.80.253.0:8000/api/personal-card/
+
+{
+    "name": "John",
+    "middle_name": "Michael",
+    "last_name": "Doe",
+    "age": 30,
+    "gender": "Male",
+    "vaccinated": "Yes"
+}
+Expected Response (201 Created)
+
+2️⃣ Create Personal Card (Duplicate Entry)
+Expected Response (200 ok)
+
+3️⃣ Create Personal Card (Invalid Human Age)
+{
+    "name": "Alice",
+    "middle_name": "",
+    "last_name": "Brown",
+    "age": 150,
+    "gender": "Female",
+    "vaccinated": "No"
+}
+Expected Response (400 Bad Request)
+{
+    "age": [
+        "Ensure this value is less than or equal to 120."
+    ]
+}
+
+4️⃣ Create Personal Card (Invalid Gender Value)
+{
+    "name": "Emma",
+    "middle_name": "Grace",
+    "last_name": "Wilson",
+    "age": 25,
+    "gender": "Other",
+    "vaccinated": "Yes"
+}
+
+Expected Response (400 Bad Request)
+{
+    "gender": [
+        "\"Other\" is not a valid choice."
+    ]
+}
+
+5️⃣ Retrieve All Personal Cards
+URL:
+https://api.farmerup.online/VOLOOO
+
+or http://54.81.85.133:8000/api/personal-cards/ (But this is not going to work in chrome only
+                                                 in Postamn since I did not attached SSL certificate)
+
+6️⃣ Get Personal Card Details (Valid ID)
+URL:
+
+http://3.80.253.0:8000/api/personal-card/<Id int>
+
+Expected Response (200 OK)
+And Data of that person
+
+7️⃣ Get Personal Card Details (Invalid ID)
+Expected Response (404 Not Found)
+{
+    "error": "Personal card not found"
+}
+
+8️⃣ Add Vaccination Record (Valid Data)
+URL: POST
+
+http://3.80.253.0:8000/api/vaccination-detail/
+
+{
+    "person": 1,
+    "place": "City Hospital",
+    "vaccination_date": "2024-02-01",
+    "vaccination_name": "COVID-19",
+    "valid_until": "2025-02-01"
+}
+Expected Response (201 Created):
+
+9️⃣ Add Vaccination Record (Invalid Person ID)
+Expected Response (400 Bad Request):
+{
+    "person": [
+        "Invalid pk \"15\" - object does not exist."
+    ]
+}
+
+🔟 Check Vaccination Validity (Valid Case)
+URL: POST
+
+http://3.80.253.0:8000/api/check-vaccination/1/COVID-19/
+
+{
+    "person_id": 1,
+    "vaccination_name": "COVID-19",
+    "valid": false
+}
+
