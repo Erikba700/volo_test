@@ -1,26 +1,70 @@
 services:
   web:
-    build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    image: erikbadalyan/v_mobile-web
+    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     ports:
       - "8000:8000"
     depends_on:
       - db
     environment:
       - DATABASE_URL=postgres://volVo:EPAM@db:5432/personal_card_db
+      - POSTGRES_DB=personal_card_db
+      - POSTGRES_USER=volVo
+      - POSTGRES_PASSWORD=EPAM
+      - POSTGRES_HOST=db
 
   db:
     image: postgres:latest
     restart: always
+    ports:
+      - "5433:5432"
     environment:
       POSTGRES_DB: personal_card_db
       POSTGRES_USER: volVo
       POSTGRES_PASSWORD: EPAM
-    ports:
-      - "5433:5432"
+      POSTGRES_HOST: db
     volumes:
       - pgdata:/var/lib/postgresql/data
 
 volumes:
   pgdata:
 
+
+# instance docker compose
+# version: "3.3"
+#
+#services:
+#  web:
+#    image: erikbadalyan/v_mobile-web:multi
+#    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+#    ports:
+#      - "8000:8000"
+#    depends_on:
+#      - db
+#    environment:
+#      DATABASE_URL: postgres://volVo:EPAM@db:5432/personal_card_db
+#      POSTGRES_DB: personal_card_db
+#      POSTGRES_USER: volVo
+#      POSTGRES_PASSWORD: EPAM
+#      POSTGRES_HOST: db
+#
+#  db:
+#    image: postgres:latest
+#    restart: always
+#    ports:
+#      - "5433:5432"
+#    environment:
+#      POSTGRES_DB: personal_card_db
+#      POSTGRES_USER: volVo
+#      POSTGRES_PASSWORD: EPAM
+#      POSTGRES_HOST: db
+#    volumes:
+#      - pgdata:/var/lib/postgresql/data
+#    healthcheck:
+#      test: ["CMD-SHELL", "pg_isready -U volVo -d personal_card_db"]
+#      interval: 10s
+#      timeout: 5s
+#      retries: 5
+#
+#volumes:
+#  pgdata:

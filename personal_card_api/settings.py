@@ -25,7 +25,7 @@ SECRET_KEY = "9%3@*ef@0+8-d6(0#!bo10l%!!r22cea&kyqz%gi$*-*qcrjf"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = "True"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["3.80.253.0"] # the ec2 instance static ip (Elastic IP)
 
 
 # Application definition
